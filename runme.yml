@@ -1,0 +1,9 @@
+- name: Configure system cluster
+  hosts: all
+  roles: 
+    - system
+
+- name: Configure openlava master
+  hosts: compute-master
+  roles:
+    - openlava

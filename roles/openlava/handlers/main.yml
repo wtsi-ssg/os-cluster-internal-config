@@ -1,0 +1,6 @@
+---
+# handlers file for openlava
+- name: restart openlava
+  service: name=openlava state=restarted
+  sudo: True
+

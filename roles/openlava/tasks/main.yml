@@ -1,0 +1,4 @@
+---
+# tasks file for openlava
+- template: src=lsf.cluster.openlava.j2 dest=/opt/openlava-3.1/etc/lsf.cluster.openlava owner=openlava group=openlava mode="u=rw,g=r,o=r"
+  notify: restart openlava
