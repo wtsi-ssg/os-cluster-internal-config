@@ -2,5 +2,5 @@
 # tasks file for openlava
 - template: src=lsf.cluster.openlava.j2 dest=/opt/openlava-3.1/etc/lsf.cluster.openlava owner=openlava group=openlava mode="u=rw,g=r,o=r"
   notify: restart openlava
-- file: src=opt/openlava-3.1/etc/lsf.conf dest=/opt/openlava-3.1/etc/lsf.conf owner=openlava group=openlava mode="u=rw,g=r,o=r"
+- file: src=/etc/ansible/roles/openlava/files/opt dest=/ owner=openlava group=openlava mode="u=rw,g=r,o=r"
   notify: restart openlava
