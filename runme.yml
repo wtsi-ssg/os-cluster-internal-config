@@ -4,6 +4,6 @@
     - system
 
 - name: Configure openlava master
-  hosts: compute-master
+  hosts: all
   roles:
     - openlava
