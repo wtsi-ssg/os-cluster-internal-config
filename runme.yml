@@ -7,3 +7,8 @@
   hosts: all
   roles:
     - openlava
+
+- name: Configure openlava user
+  hosts: cloud-head
+  roles:
+    - user_config
