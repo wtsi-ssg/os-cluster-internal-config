@@ -4,3 +4,5 @@
   notify: restart openlava
 - template: src=lsf.conf.j2 dest=/opt/openlava-3.1/etc/lsf.conf owner=openlava group=openlava mode="u=rw,g=r,o=r"
   notify: restart openlava
+- template: src=lsb.queues.j2 dest=/opt/openlava-3.1/etc/lsb.queues owner=openlava group=openlava mode="u=rw,g=r,o=r"
+  notify: restart openlava
