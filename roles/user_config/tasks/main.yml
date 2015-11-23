@@ -1,0 +1,3 @@
+---
+# tasks file for user_config
+- template: src=.bashrc.j2 dest=/home/ubuntu/.bashrc owner=ubuntu group=ubuntu mode="u=rwx,g=r,o=r"
