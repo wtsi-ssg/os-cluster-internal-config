@@ -11,7 +11,7 @@ echo "$SERVER_IP   $SERVER_NAME" >> /etc/hosts
 echo "$SERVER_IP   $SERVER_NAME" >> /etc/cloud/templates/hosts.debian.tmpl
 sed -i "s/localhost/$SERVER_NAME/" /opt/openlava-3.1/etc/lsb.hosts
 sed -i "s/localhost/$SERVER_NAME !  !     1       -       -\n`hostname`/" /opt/openlava-3.1/etc/lsf.cluster.openlava
-echo LSF_MASTER_LIST=\"$SERVER_NAME\" >> /opt/openlava-3.1/etc/lsf.conf 
+echo LSF_SERVER_HOSTS=\"$SERVER_NAME\" >> /opt/openlava-3.1/etc/lsf.conf 
 ln -s /opt/openlava-3.1/etc/openlava /etc/init.d
 update-rc.d openlava defaults
 chmod -R 700 /root/.ssh /opt/openlava-3.1/work
