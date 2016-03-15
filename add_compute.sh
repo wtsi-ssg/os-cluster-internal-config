@@ -21,7 +21,7 @@ update-rc.d openlava defaults
 (ip addr show dev eth0 | grep "inet " | awk '{print $2}' | awk -F/ '{printf ("%s ",$1)}' ; hostname ) |  ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -i /home/ubuntu/.ssh/id_rsa ubuntu@$SERVER_NAME 'sudo tee -a /etc/cloud/templates/hosts.debian.tmpl'
 /opt/openlava-3.1/etc/openlava start
 sleep 30
-ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -i /home/ubuntu/.ssh/id_rsa ubuntu@$SERVER_NAME "sudo lsaddhost  `hostname`"
+ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -i /home/ubuntu/.ssh/id_rsa ubuntu@$SERVER_NAME "sudo /root/add_single_client.sh   `hostname`"
 logger  "Starting cluster client complete"
-sleep 120 
+sleep 20 
 reboot
