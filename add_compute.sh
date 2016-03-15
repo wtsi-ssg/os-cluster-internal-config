@@ -15,6 +15,7 @@ update-rc.d openlava defaults
 chmod -R 700 /root/.ssh /opt/openlava-3.1/work
 chown -R root /root/.ssh /opt/openlava-3.1/work
 echo "$SERVER_NAME:/home   /home  nfs defaults 0 0" >> /etc/fstab
+mount /home
 (ip addr show dev eth0 | grep "inet " | awk '{print $2}' | awk -F/ '{printf ("%s ",$1)}' ; hostname ) |  ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no $SERVER_NAME 'sudo tee -a /etc/hosts'
 (ip addr show dev eth0 | grep "inet " | awk '{print $2}' | awk -F/ '{printf ("%s ",$1)}' ; hostname ) |  ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no $SERVER_NAME 'sudo tee -a/etc/cloud/templates/hosts.debian.tmpl'
 echo lsaddhost  `hostname`  |  ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no $SERVER_NAME
