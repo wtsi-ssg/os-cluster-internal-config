@@ -1,7 +1,9 @@
 #!/bin/bash
 SERVER_IP=$1
 SERVER_NAME=$2
-if [ grep $SERVER_NAME /etc/hosts ] ; then
+logger  "Starting cluster client setup"
+grep -s $SERVER_NAME /etc/hosts > /dev/null 
+if [ $? -eq 0 ] ; then
   exit 0
 fi
 sed -i -e 's/127.0.0.1 localhost//' -e 's/127.0.1.1/127.0.0.1/' /etc/cloud/templates/hosts.debian.tmpl 
@@ -19,4 +21,5 @@ mount /home
 (ip addr show dev eth0 | grep "inet " | awk '{print $2}' | awk -F/ '{printf ("%s ",$1)}' ; hostname ) |  ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no $SERVER_NAME 'sudo tee -a /etc/hosts'
 (ip addr show dev eth0 | grep "inet " | awk '{print $2}' | awk -F/ '{printf ("%s ",$1)}' ; hostname ) |  ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no $SERVER_NAME 'sudo tee -a/etc/cloud/templates/hosts.debian.tmpl'
 echo lsaddhost  `hostname`  |  ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no $SERVER_NAME
+logger  "Starting cluster client complete"
 
