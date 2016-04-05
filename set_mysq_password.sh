@@ -21,11 +21,13 @@ if [ $? -eq 0 ] ; then
   ( cd /var/lib/; tar cf -  mysql ) | ( cd /data01/mysql_server/ ; tar xfp -)
   mv /var/lib/mysql /var/lib/mysql.old
   ln -s /data01/mysql_server/mysql /var/lib/mysql
+  # And apparmor ( Thanks hb5 )
+  echo >> /etc/apparmor.d/local/usr.sbin.mysqld
+  echo "/data01/mysql_server/mysql/ r," >> /etc/apparmor.d/local/usr.sbin.mysqld
+  echo "/data01/mysql_server/mysql/** rwk,"  >> /etc/apparmor.d/local/usr.sbin.mysqld
+  /etc/init.d/apparmor start
 fi
 # 512MB for the OS and then 80% of the rest
 INNODB=`cat /proc/meminfo | awk '/MemTotal:/ {printf("%d", .8*(($2-(512*1024)))/1024)}'`
 sed -e 's/^# . InnoDB.*$/# \* InnoDB \ninnodb_buffer_pool_size = '$INNODB'M/'  -i /etc/mysql/my.cnf 
 /etc/init.d/mysql start
-
-
-
