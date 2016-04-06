@@ -9,6 +9,9 @@ export          MYSQL_PASSWORD=`pwgen -1cns`
 export   WORDPRESS_DB_PASSWORD=`pwgen -1cns`;
 export WORDPRESS_USER_PASSWORD=`pwgen -1cns`;
 
+if [ -f /root/.configured] ; then
+  exit 0;
+fi
 ##----------------------------------------------------------------------
 ## Post boot - Create the wordpress database with a random password!
 ##----------------------------------------------------------------------
@@ -80,6 +83,7 @@ curl --header 'Host: '$HOST \
      'http://127.0.0.1/wp-admin/install.php?step=2'
 
 echo $WORDPRESS_USER_PASSWORD > /home/ubuntu/.wordpress.password
+echo "Do not delete this file otherwise the system will be reset on reboot" > /root/.configured
 
 ##----------------------------------------------------------------------
 ## Post boot - Reconfigure postfix domain....
