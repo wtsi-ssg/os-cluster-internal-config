@@ -147,5 +147,5 @@ cat << EOF > /etc/motd
 ##    /home/ubuntu/.my.cnf                                       ##
 ##                                                               ##
 ###################################################################
-
 EOF
+export > /root/.setup_env
