@@ -12,6 +12,21 @@ export WORDPRESS_USER_PASSWORD=`pwgen -1cns`;
 if [ -f /root/.configured] ; then
   exit 0;
 fi
+grep -q  /data01 /proc/mounts
+if [ $? -eq 0 ] ; then
+  if [ -d /data01/wordpress_server ] ; then
+    exit 0
+  fi
+  /etc/init.d/apache2 start
+  ( cd /var/; tar cf -  www) | ( cd /data01/wordpress_server ; tar xfp -)
+  mv /var/www /var/www.old
+  ln -s /data01/wordpress_server/www /var/www
+  ( cd /var/log ; tar cf -  apache2 ) | ( cd /data01/wordpress_server ; tar xfp -)
+  mv /var/log/apache2 /var/log/apache2.old
+  ln -s /data01/wordpress_server/apache2 /var/log/apache2
+  /etc/init.d/apache2 stop
+fi
+  
 ##----------------------------------------------------------------------
 ## Post boot - Create the wordpress database with a random password!
 ##----------------------------------------------------------------------
