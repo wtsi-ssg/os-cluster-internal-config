@@ -17,6 +17,7 @@ if [ $? -eq 0 ] ; then
   if [ -d /data01/wordpress_server ] ; then
     exit 0
   fi
+  mkdir -p /data01/wordpress_server 
   /etc/init.d/apache2 start
   ( cd /var/; tar cf -  www) | ( cd /data01/wordpress_server ; tar xfp -)
   mv /var/www /var/www.old
