@@ -18,14 +18,15 @@ if [ $? -eq 0 ] ; then
     exit 0
   fi
   mkdir -p /data01/wordpress_server 
-  /etc/init.d/apache2 start
+  /etc/init.d/apache2 stop
   ( cd /var/; tar cf -  www) | ( cd /data01/wordpress_server ; tar xfp -)
   mv /var/www /var/www.old
   ln -s /data01/wordpress_server/www /var/www
   ( cd /var/log ; tar cf -  apache2 ) | ( cd /data01/wordpress_server ; tar xfp -)
   mv /var/log/apache2 /var/log/apache2.old
   ln -s /data01/wordpress_server/apache2 /var/log/apache2
-  /etc/init.d/apache2 stop
+  /etc/init.d/apache2 start
+  sleep 5
 fi
   
 ##----------------------------------------------------------------------
