@@ -1,5 +1,5 @@
 #!/bin/bash
-if [ -f /root/.configured] ; then
+if [ -f /root/.configured ] ; then
   exit 0;
 fi
 /etc/init.d/postgresql stop
