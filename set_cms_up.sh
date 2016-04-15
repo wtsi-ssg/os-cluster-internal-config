@@ -287,6 +287,7 @@ EOF
 ## Make it read write by user only so that it can't be read by others!
 chmod 600 /home/ubuntu/.my.cnf
 chown ubuntu: /home/ubuntu/.my.cnf
+chown -R www-data: /var/www
 
 ## Write out the motd - with information on how to get db details etc
 ## and let people know what has been set up
