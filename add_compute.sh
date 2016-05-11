@@ -23,5 +23,6 @@ update-rc.d openlava defaults
 sleep 30
 ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -i /home/ubuntu/.ssh/id_rsa ubuntu@$SERVER_NAME "sudo /root/add_compute_node_on_head.sh `hostname`"
 logger  "Starting cluster client complete"
-sleep 20 
+lsadmin limrestart
+sleep 30 
 reboot
